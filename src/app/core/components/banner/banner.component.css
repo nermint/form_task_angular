@@ -1,0 +1,23 @@
+.layout-holder__banner {
+    /* position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 50%;
+    display: flex; */
+    /* width: 50%; */
+    height: 100vh;
+}
+
+
+.layout-holder__banner__basic {
+    width: 45vw;
+    height: 100%;
+    text-align: center;
+    background: url(../../../../assets/images/banner/banner-main.jpg) no-repeat;
+    background-position: 50%;
+    background-size: cover
+}

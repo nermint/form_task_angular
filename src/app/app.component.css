@@ -1,0 +1,6 @@
+.layout-holder{
+    display: flex; 
+    flex-grow: grow;
+    height: 100vh;
+    overflow: hidden;
+}
