@@ -7,13 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BannerComponent } from './core/components/banner/banner.component';
 import { FormComponent } from './core/pages/form/form.component';
 import { SuccessComponent } from './core/pages/success/success.component';
+import { FooterComponent } from './core/components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
     FormComponent,
-    SuccessComponent
+    SuccessComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
