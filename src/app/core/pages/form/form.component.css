@@ -133,6 +133,9 @@
     padding: 24px 0 8px;
     border-bottom: 1px dashed #bd60cf
 }
+.add-btn{
+    margin-bottom: 30px;
+}
 
 .layout-holder__content__body__form__holder__section__area__block__list__item:first-child {
     padding-top: 0
