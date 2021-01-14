@@ -2,7 +2,7 @@
 <form [formGroup]="invoiceForm">
   <div formArrayName="itemRows">
   
-    <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
+    <div *ngFor="let itemRow of getControls(); let i=index"  [formGroupName]="i">
       <h4>Invoice Row #{{ i + 1 }}</h4>
       <div class="form-group">
         <label>Item Name</label>

@@ -47,7 +47,7 @@
                   />
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                   <mat-label>Doğum tarixi</mat-label>
                   <input
                     matInput
@@ -108,7 +108,7 @@
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                   <mat-label>Şəhid olduğu tarix</mat-label>
                   <input matInput [matDatepicker]="picker2" />
                   <mat-datepicker-toggle
@@ -164,10 +164,10 @@
             <div
               class="layout-holder__content__body__form__holder__section__area"
               *ngFor="
-                let itemrow of formGroup.controls.rewards.controls;
+                let itemrow of rewardsArr.controls
                 let i = index
               "
-              [formGroupName]="i"
+              [formGroupName]="i" 
             >
               <div
                 class="layout-holder__content__body__form__holder__section__area__block"
@@ -200,7 +200,7 @@
                         />
                       </mat-form-field>
 
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>Tarix</mat-label>
                         <input
                           matInput
@@ -236,7 +236,7 @@
             <div
               class="layout-holder__content__body__form__holder__section__area"
               *ngFor="
-                let itemrow of formGroup.controls.children.controls;
+                let itemrow of childrenArr.controls;
                 let i = index
               "
               [formGroupName]="i"
@@ -323,7 +323,7 @@
                         />
                       </mat-form-field>
 
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="outline">
                         <mat-label>Doğum tarixi</mat-label>
                         <input
                           matInput
@@ -396,7 +396,7 @@
             <div
               class="layout-holder__content__body__form__holder__section__area"
               *ngFor="
-                let itemrow of formGroup.controls.apartments.controls;
+                let itemrow of apartmentArr.controls;
                 let i = index
               "
               [formGroupName]="i"
@@ -545,8 +545,8 @@
         </div>
 
         <div class="layout-holder__content__body__form__footer">
-          <button class="btn btn-fluid btn-primary">GÖNDƏR</button>
-        </div>
+          <button class="btn btn-fluid btn-primary" [disabled]="! formGroup.valid">GÖNDƏR</button>
+        </div> 
       </form>
 
       <app-footer></app-footer>

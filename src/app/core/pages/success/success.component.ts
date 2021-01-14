@@ -21,6 +21,10 @@ export class SuccessComponent implements OnInit {
     return this.invoiceForm.get('itemRows') as FormArray;
   }
 
+  getControls() {
+    return (this.invoiceForm.get('itemRows') as FormArray).controls;
+  }
+
   initItemRows() {
     return this._fb.group({
       itemname: ['']
