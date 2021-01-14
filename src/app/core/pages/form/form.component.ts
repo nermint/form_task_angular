@@ -74,6 +74,10 @@ export class FormComponent implements OnInit {
   get childrenArr() {
     return this.formGroup.get('children') as FormArray;
   }
+  
+  get apartmentArr() {
+    return this.formGroup.get('apartments') as FormArray;
+  }
 
   addNewReward() {
     this.rewardsArr.push(this.initRewardsItem());
@@ -81,6 +85,9 @@ export class FormComponent implements OnInit {
   }
   addChild() {
     this.childrenArr.push(this.initChildrenItem());
+  }
+  addApartment(){
+    this.apartmentArr.push(this.initApartmentsItem());
   }
 
   onFileChange($event) {
