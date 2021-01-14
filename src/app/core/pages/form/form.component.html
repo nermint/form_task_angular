@@ -84,20 +84,34 @@
  
                                   <mat-form-field appearance="fill">
                                     <mat-label>Şəhid olduğu tarix</mat-label>
-                                    <input matInput [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <input matInput [matDatepicker]="picker2">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
                                   </mat-form-field>
+
+                                  <!-- <div class="form-group form-inline">
+                                    <label class="btn btn-secondary btn-file">Browse
+                                       <input name="file" type="file" (change)="onFileChange($event)">
+                                       <input type="hidden" name="fileHidden" formControlName="identityPhotoId"/> 
+                                    </label>
+                            
+                                    <p *ngIf="file" class="pl-4 align-middle mb-0">{{file.name}}</p>
+                                    <button type="button" class="btn btn-primary">Upload</button>
+                                  </div> -->
+                                 
 
                                 <div class="col-lg-6">
                                     <div class="input-wrapper m-b-20 ">
                                         <label for="" class="input-label">Şəxsiyyət vəsiqəsinin və ya hərbi biletin
                                             şəkli</label>
                                         <div class="fileupload">
-                                            <span class="fileupload-placeholder">Fayl</span>
+                                            <span class="fileupload-placeholder">{{fileName}}</span>
                                             <label for="file"
-                                                class="fileupload-button btn btn-small btn-primary">Yüklə<input
-                                                    id="file" type="file"></label>
+                                                class="fileupload-button btn btn-small btn-primary">Yüklə
+                                                <input
+                                                    id="file" type="file" (change)="onFileChange($event)"
+                                                    ></label>
+                                                    <input type="hidden" name="fileHidden" formControlName="identityPhotoId"/> 
                                         </div>
                                         <div class="fileupload-list">
                                             <div class="fileupload-file">
@@ -108,7 +122,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
 
                             </div>
@@ -338,11 +351,6 @@
 
                 </div>
 
-                
-                <mat-form-field appearance="outline">
-                    <mat-label> Name </mat-label>
-                    <input matInput placeholder="Name"   formControlName="name" />
-                </mat-form-field>
 
                 <div class="layout-holder__content__body__form__footer">
                     <button class="btn btn-fluid btn-primary">GÖNDƏR</button>
