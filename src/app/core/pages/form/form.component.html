@@ -1,5 +1,5 @@
 
-    <div class="layout-holder__content">
+     <div class="layout-holder__content"> 
         <div class="layout-holder__content__header">
             <a href="#" class="logo">
                 <img src="assets/images/logo/logo.svg" class="img-fluid" alt="logo">
@@ -11,83 +11,84 @@
                     <h1 class="layout-holder__content__body__form__head__title">Şəhid ailələri və yaralılarla görüş
                     </h1>
                 </div>
+
+                <form action="" [formGroup]='formGroup'>
                 <div class="layout-holder__content__body__form__holder">
                     <div class="layout-holder__content__body__form__holder__section">
                         <h2 class="layout-holder__content__body__form__holder__section__title">Şəhidin şəxsi
                             məlumatları</h2>
                         <div class="layout-holder__content__body__form__holder__section__area">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <!-- <div class="col-lg-6">
                                     <div class="input-wrapper m-b-20">
                                         <label class="input-label">Ad</label>
                                         <input type="text" class="input-control" placeholder="Ad">
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Soyad</label>
-                                        <input type="text" class="input-control" placeholder="Soyad">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Ata adı</label>
-                                        <input type="text" class="input-control" placeholder="Ata adı">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Doğum tarixi</label>
-                                        <input type="text" class="input-control" placeholder="Doğum tarixi">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Yaşadığı ünvan</label>
-                                        <input type="text" class="input-control" placeholder="Yaşadığı ünvan">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Əlaqə vasitəsi</label>
-                                        <input type="text" class="input-control" placeholder="Əlaqə vasitəsi">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">FİN nömrə və ya hərbi biletin nömrəsi</label>
-                                        <input type="text" class="input-control" placeholder="Nömrəni qeyd ediniz">
-                                    </div>
-                                </div>
+                                </div> -->
+                                <mat-form-field appearance="outline">
+                                    <mat-label> Ad </mat-label>
+                                    <input matInput placeholder="Ad"   formControlName="name" />
+                                </mat-form-field>
 
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper has-icon m-b-20">
-                                        <label class="input-label">Şəhid olduğu rayon</label>
-                                        <div class="input-wrapper">
-                                            <select class="input-control">
-                                                <option selected="selected" disabled="disabled">Seçiniz</option>
-                                                <option value="0">Ağdam</option>
-                                                <option value="1">Ağdərə</option>
-                                                <option value="2">Cəbrayıl</option>
-                                                <option value="3">Xocalı</option>
-                                                <option value="4">Xocavənd</option>
-                                                <option value="5">Laçın</option>
-                                                <option value="6">Şuşa</option>
-                                                <option value="7">Kəlbəcər</option>
-                                                <option value="8">Zəngilan</option>
-                                                <option value="9">Qubadlı</option>
-                                                <option value="10">Füzuli</option>
-                                            </select>
-                                            <span class="input-icon icon-chevron-down"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="input-wrapper m-b-20">
-                                        <label class="input-label">Şəhid olduğu tarix</label>
-                                        <input type="text" class="input-control" placeholder="Şəhid olduğu tarix">
-                                    </div>
-                                </div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label> Soyad </mat-label>
+                                    <input matInput placeholder="Soyad"   formControlName="surname" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label> Ata adı </mat-label>
+                                    <input matInput placeholder="Ata adı"   formControlName="fathername" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Doğum tarixi</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="birthdate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label> Yaşadığı ünvan</mat-label>
+                                    <input matInput placeholder="Yaşadığı ünvan"   formControlName="familyAddress" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label> Əlaqə vasitəsi</mat-label>
+                                    <input matInput placeholder="Əlaqə vasitəsi"   formControlName="contactInfo" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label> FİN nömrə və ya hərbi biletin nömrəsi</mat-label>
+                                    <input matInput placeholder="Nömrəni qeyd ediniz"   formControlName="fin" />
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="mat-form-fiel_1">
+                                    <mat-label>Şəhid olduğu rayon</mat-label>
+                                    <mat-select formControlName="regionId">
+                                        <mat-option selected="selected" disabled="disabled">Seçiniz</mat-option>
+                                        <mat-option value="0">Ağdam</mat-option>
+                                        <mat-option value="1">Ağdərə</mat-option>
+                                        <mat-option value="2">Cəbrayıl</mat-option>
+                                        <mat-option value="3">Xocalı</mat-option>
+                                        <mat-option value="4">Xocavənd</mat-option>
+                                        <mat-option value="5">Laçın</mat-option>
+                                        <mat-option value="6">Şuşa</mat-option>
+                                        <mat-option value="7">Kəlbəcər</mat-option>
+                                        <mat-option value="8">Zəngilan</mat-option>
+                                        <mat-option value="9">Qubadlı</mat-option>
+                                        <mat-option value="10">Füzuli</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+
+ 
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Şəhid olduğu tarix</mat-label>
+                                    <input matInput [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+
                                 <div class="col-lg-6">
                                     <div class="input-wrapper m-b-20 ">
                                         <label for="" class="input-label">Şəxsiyyət vəsiqəsinin və ya hərbi biletin
@@ -107,6 +108,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -333,19 +337,33 @@
                     </div>
 
                 </div>
+
+                
+                <mat-form-field appearance="outline">
+                    <mat-label> Name </mat-label>
+                    <input matInput placeholder="Name"   formControlName="name" />
+                </mat-form-field>
+
                 <div class="layout-holder__content__body__form__footer">
                     <button class="btn btn-fluid btn-primary">GÖNDƏR</button>
                 </div>
 
+                </form>
+
                 <app-footer></app-footer>
+
             </div>
            
         </div>
 
-    
+    </div> 
 
-    </div>
-
+    <!-- <form [formGroup]='formGroup'>
+        <mat-form-field appearance="outline" class="mat-form-fiel_2">
+            <mat-label> Name </mat-label>
+            <input matInput placeholder="Name"   formControlName="name" />
+        </mat-form-field>
+   </form> -->
    
 
  
