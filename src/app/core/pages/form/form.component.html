@@ -110,7 +110,7 @@
 
                 <mat-form-field appearance="outline">
                   <mat-label>Şəhid olduğu tarix</mat-label>
-                  <input matInput [matDatepicker]="picker2" />
+                  <input matInput [matDatepicker]="picker2" formControlName="dateOfMartyrdomOrVeteran"/>
                   <mat-datepicker-toggle
                     matSuffix
                     [for]="picker2"
@@ -241,6 +241,9 @@
               "
               [formGroupName]="i"
             >
+              <pre>
+                <pre>{{itemrow.value | json}}</pre>
+              </pre>
               <div
                 class="layout-holder__content__body__form__holder__section__area__block"
               >
@@ -354,11 +357,11 @@
                               <input
                                 id="file"
                                 type="file"
-                                (change)="onFileChange($event)"
+                                (change)="onChildrenPhotoChange($event)"
                             /></label>
                             <input
                               type="hidden"
-                              name="fileHidden"
+                              name="identityPhotoId"
                               formControlName="identityPhotoId"
                             />
                           </div>
@@ -545,8 +548,10 @@
         </div>
 
         <div class="layout-holder__content__body__form__footer">
-          <button class="btn btn-fluid btn-primary" [disabled]="! formGroup.valid">GÖNDƏR</button>
+          <button class="btn btn-fluid btn-primary" (click)="getFormData()">GÖNDƏR</button>
         </div> 
+
+        <!-- [disabled]="! formGroup.valid" -->
       </form>
 
       <app-footer></app-footer>
