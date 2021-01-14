@@ -131,27 +131,14 @@
                                                 class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__remove icon-times"></span>
                                         </div>
                                         <div class="row">
-                                            
-                                            <!-- <div class="col-lg-8">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Fəxri adın təsviri</label>
-                                                    <input type="text" class="input-control"
-                                                        placeholder="Fəxri adın təsviri">
-                                                </div>
-                                            </div> -->
+                                     
                                             <mat-form-field appearance="outline">
                                                 <mat-label> Fəxri adın təsviri </mat-label>
                                                 <input matInput placeholder="Fəxri adın təsviri"   formControlName="name" />
                                             </mat-form-field>
                                             
-                                            <!-- <div class="col-lg-4">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Tarix</label>
-                                                    <input type="text" class="input-control" placeholder="Tarix">
-                                                </div>
-                                            </div> -->
                                             <mat-form-field appearance="fill">
-                                                <mat-label>Doğum tarixi</mat-label>
+                                                <mat-label>Tarix</mat-label>
                                                 <input matInput [matDatepicker]="picker3" formControlName="date">
                                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                                 <mat-datepicker #picker3></mat-datepicker>
@@ -162,18 +149,18 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-fluid btn-transparent add-btn" 
-                                (click)="addNewRow()"
+                                (click)="addNewReward()"
                                 >Əlavə et</button>
                             </div>
                         </div>
                     </div>
 
-
-
-                    <div class="layout-holder__content__body__form__holder__section">
+                    <div class="layout-holder__content__body__form__holder__section" formArrayName="children">
                         <h2 class="layout-holder__content__body__form__holder__section__title">Şəhidin övladları
                             haqqında məlumat</h2>
-                        <div class="layout-holder__content__body__form__holder__section__area">
+                        <div class="layout-holder__content__body__form__holder__section__area"
+                        *ngFor="let itemrow of formGroup.controls.children.controls; let i=index"  [formGroupName]="i"
+                        >
 
                             <div class="layout-holder__content__body__form__holder__section__area__block">
                                 <div class="layout-holder__content__body__form__holder__section__area__block__list">
@@ -183,7 +170,7 @@
                                             class="layout-holder__content__body__form__holder__section__area__block__list__item__heading">
                                             <h4
                                                 class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__title">
-                                                #1</h4>
+                                                #{{ i + 1 }}</h4>
                                             <span
                                                 class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__remove icon-times"></span>
                                         </div>
@@ -196,13 +183,17 @@
                                                         <div class="radio-group">
                                                             <label for="genderChildrenType" class="radio">
                                                                 <input name="gender" type="radio"
-                                                                    id="genderChildrenType" value=1>
+                                                                    id="genderChildrenType" value=1
+                                                                    formControlName="gender"
+                                                                    >
                                                                 <span class="radio-control"></span>
                                                                 <span class="radio-label">Kişi</span>
                                                             </label>
                                                             <label for="genderChildrenType2" class="radio">
                                                                 <input name="gender" type="radio"
-                                                                    id="genderChildrenType2" value=2>
+                                                                    id="genderChildrenType2" value=2
+                                                                    formControlName="gender"
+                                                                    >
                                                                 <span class="radio-control"></span>
                                                                 <span class="radio-label">Qadın</span>
                                                             </label>
@@ -210,59 +201,66 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label> Adı </mat-label>
+                                                <input matInput placeholder="Adı"   formControlName="name" />
+                                            </mat-form-field>
+            
+                                            <mat-form-field appearance="outline">
+                                                <mat-label> Soyadı </mat-label>
+                                                <input matInput placeholder="Soyadı"   formControlName="surname" />
+                                            </mat-form-field>
+
+
+                                            <mat-form-field appearance="outline">
+                                                <mat-label> Fin kod</mat-label>
+                                                <input matInput placeholder="Fin kod"   formControlName="fin" />
+                                            </mat-form-field>
+
+                                             <mat-form-field appearance="fill">
+                                                <mat-label>Doğum tarixi</mat-label>
+                                                <input matInput [matDatepicker]="picker4" formControlName="birthdate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker4></mat-datepicker>
+                                            </mat-form-field>
+
+
+
                                             <div class="col-lg-6">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Adı</label>
-                                                    <input type="text" class="input-control" placeholder="Adı">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Soyadı</label>
-                                                    <input type="text" class="input-control" placeholder="Soyadı">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Fin kod</label>
-                                                    <input type="text" class="input-control" placeholder="Fin kod">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="input-wrapper m-b-20">
-                                                    <label class="input-label">Doğum tarixi</label>
-                                                    <input type="text" class="input-control"
-                                                        placeholder="Doğum tarixi">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
                                                 <div class="input-wrapper m-b-20 ">
                                                     <label for="" class="input-label">Şəxsiyyət vəsiqəsinin şəkili
                                                         (yalnız
                                                         ön tərəf)</label>
                                                     <div class="fileupload">
-                                                        <span class="fileupload-placeholder">Fayl</span>
+                                                        <span class="fileupload-placeholder">{{fileName}}</span>
                                                         <label for="file"
-                                                            class="fileupload-button btn btn-small btn-primary">Yüklə<input
-                                                                id="file" type="file"></label>
+                                                            class="fileupload-button btn btn-small btn-primary">Yüklə
+                                                            <input
+                                                                id="file" type="file" (change)="onFileChange($event)"
+                                                                ></label>
+                                                                <input type="hidden" name="fileHidden" formControlName="identityPhotoId"/> 
                                                     </div>
                                                     <div class="fileupload-list">
                                                         <div class="fileupload-file">
                                                             <span class="fileupload-file__remove icon-times">x</span>
                                                             <span class="fileupload-file__name">photo</span>
                                                         </div>
-
+            
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </div>
 
                                 </div>
-                                <button class="btn btn-fluid btn-transparent">Əlavə et</button>
+                                <button class="btn btn-fluid btn-transparent add-btn" (click)="addChild()">Əlavə et</button>
                             </div>
                         </div>
                     </div>
+
+
                     <div class="layout-holder__content__body__form__holder__section">
                         <h2 class="layout-holder__content__body__form__holder__section__title">Ailə üzvlərinin
                             mülkiyyətində olan mənzil və ya fərdi evi haqqında məlumat</h2>
@@ -356,10 +354,6 @@
                     </div>
 
                 </div>
-
-
-           
-
 
 
 
