@@ -7,7 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SuccessComponent } from './core/pages/success/success.component';
 import { CoreModule } from './core/core.module';
 
+// forms
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
+
+// http
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +25,16 @@ import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+     }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
