@@ -123,23 +123,12 @@
                     <label for="" class="input-label"
                       >Şəxsiyyət vəsiqəsinin və ya hərbi biletin şəkli</label
                     >
+                    <!-- formControlName="identityPhotoId" -->
                     <div class="fileupload">
-                      <span class="fileupload-placeholder">{{ fileName }}</span>
-                      <label
-                        for="file"
-                        class="fileupload-button btn btn-small btn-primary"
-                        >Yüklə
-                        <input
-                          id="file"
-                          type="file"
-                          (change)="onFileChange($event)"
-                      /></label>
-                      <input
-                        type="hidden"
-                        name="identityPhotoId"
-                        formControlName="identityPhotoId"
-                      />
+                      <input type="file"  (change)="onFileChange($event, 'personalInfo')">
+                      <label class="fileupload-button btn btn-small btn-primary">Yüklə</label>
                     </div>
+
                     <div class="fileupload-list">
                       <div class="fileupload-file">
                         <span class="fileupload-file__remove icon-times"
@@ -148,6 +137,9 @@
                         <span class="fileupload-file__name">photo</span>
                       </div>
                     </div>
+
+
+
                   </div>
                 </div>
               </div>
@@ -242,7 +234,7 @@
               [formGroupName]="i"
             >
               <pre>
-                <pre>{{itemrow.value | json}}</pre>
+                <pre>{{childrenArr.value | json}}</pre>
               </pre>
               <div
                 class="layout-holder__content__body__form__holder__section__area__block"
@@ -346,25 +338,15 @@
                             >Şəxsiyyət vəsiqəsinin şəkili (yalnız ön
                             tərəf)</label
                           >
+
+
+
                           <div class="fileupload">
-                            <span class="fileupload-placeholder">
-                              <!-- {{fileName}} -->
-                            </span>
-                            <label
-                              for="file2"
-                              class="fileupload-button btn btn-small btn-primary"
-                              >Yüklə
-                              <input
-                                id="file2"
-                                type="file"
-                                (change)="onFileChange($event)"
-                            /></label>
-                            <input
-                              type="hidden"
-                              name="identityPhotoId"
-                              formControlName="identityPhotoId"
-                            />
+                            <input type="file" (change)="onFileChange($event, 'childrenInfo')">
+                            <label class="fileupload-button btn btn-small btn-primary">Yüklə</label>
                           </div>
+
+
                           <div class="fileupload-list">
                             <div class="fileupload-file">
                               <span class="fileupload-file__remove icon-times"
@@ -373,6 +355,9 @@
                               <span class="fileupload-file__name">photo</span>
                             </div>
                           </div>
+
+
+
                         </div>
                       </div>
                     </div>
@@ -494,25 +479,13 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="input-wrapper m-b-20">
+
                           <div class="fileupload">
-                            <span class="fileupload-placeholder">
-                              <!-- {{ fileName }} -->
-                            </span>
-                            <label
-                              for="file3"
-                              class="fileupload-button btn btn-small btn-primary"
-                              >Yüklə
-                              <input
-                                id="file3"
-                                type="file"
-                                (change)="onFileChange($event)"
-                            /></label>
-                              <input
-                                type="hidden"
-                                name="photoId"
-                                formControlName="roomCount"
-                              />
+                            <input type="file">
+                            <label class="fileupload-button btn btn-small btn-primary">Yüklə</label>
                           </div>
+
+
                           <div class="fileupload-list">
                             <div class="fileupload-file">
                               <span class="fileupload-file__remove icon-times"

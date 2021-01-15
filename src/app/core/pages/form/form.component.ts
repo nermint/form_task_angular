@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup,FormBuilder, Validators,FormArray } from '@angular/forms';
 
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
+import { FormService } from '../../services/form.service';
 
 
 @Component({
@@ -32,7 +33,10 @@ export class FormComponent implements OnInit {
     })
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private formService: FormService
+    ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -152,12 +156,18 @@ export class FormComponent implements OnInit {
   }
 
 
+  onFileChange($event, fileContain) {
 
-  onFileChange($event) {
-    let file = $event.target.files[0];
-    this.formGroup.controls['identityPhotoId'].setValue(file ? file.name : '');
-    this.fileName = file.name;
-    console.log(this.formGroup.controls['identityPhotoId'].value);
+    if($event.target.files.length > 0) 
+     {
+      let file = $event.target.files[0];
+      if(fileContain == 'personalInfo'){
+        this.formGroup.get('identityPhotoId').setValue(file ? file : '');
+      }
+    
+
+     //  this.fileName = file.name;
+     }
  }
 
 
@@ -189,14 +199,28 @@ export class FormComponent implements OnInit {
       contactInfo: this.contactInfo,
       fin: this.fin,
       identityPhotoId: this.identityPhotoId,
-      //rewards: this.rewardsArr.value,
       rewards: this.getRewards(this.rewardsArr.value),
       children: this.getChildren(this.childrenArr.value),
       apartments: this.apartmentArr.value
     }
 
     console.log(data);
-  
+    
+    // this.getPhotoId();
  }
+
+
+//  getPhotoId(){
+//     const formData = new FormData();
+//     formData.append('file', this.formGroup.get('identityPhotoId').value);
+
+//     console.log(this.identityPhotoId);
+
+//     this.formService.photoUpload(formData).subscribe( data =>{
+//       console.log(data);
+//     });
+   
+// }
+
 
 }

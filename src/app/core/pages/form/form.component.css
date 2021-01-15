@@ -80,7 +80,7 @@
 }
 
 .layout-holder__content__body__form__head__title {
-    font-size: 32px;
+    font-size: 30px;
     line-height: 40px;
     font-weight: 500;
     color: #333;
@@ -289,24 +289,24 @@
     border: 1px dashed #e6e6e6;
     overflow: hidden
 }
-.fileupload-placeholder {
-    font-size: 16px;
-    line-height: 18px;
-    font-weight: 500;
-    color: #999
+
+.fileupload input{
+    position: absolute;
+    right: -150px;
+    z-index: 1000;
+    transform: scale(1.5,1.5); 
+    -webkit-appearance: none;
+    opacity: 0;
+    cursor: pointer;
 }
+
 .fileupload-button {
     position: absolute;
     right: 1px;
     top: 1px;
-    line-height: 18px!important
+    line-height: 18px!important;
 }
 
-.fileupload-button input[type=file] {
-    -webkit-appearance: none;
-    position: absolute;
-    opacity: 0
-}
 .fileupload-file {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -340,7 +340,7 @@
     border: 0 solid transparent;
     border-radius: 4px;
     line-height: 20px;
-    padding: 10px 45px;
+    padding: 10px 35px;
     text-align: center;
     vertical-align: middle;
     text-decoration: none!important;
