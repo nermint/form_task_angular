@@ -38,7 +38,6 @@ export class FormComponent implements OnInit {
     this.initForm();
     console.log(this.photos[0]['controls'].photos.value);
     console.log(this.name);
-    // this.dateFormat(this.birthdate);
   }
 
   initRewardsItem() {
@@ -74,7 +73,7 @@ export class FormComponent implements OnInit {
     });
   }
 
-
+  // get form data
   get rewardsArr() {
     return this.formGroup.get('rewards') as FormArray;
   }
@@ -89,7 +88,6 @@ export class FormComponent implements OnInit {
     return (this.formGroup.get('apartments') as FormArray).controls;
   }
 
-  // get form data
   get name(){
     return this.formGroup.get('name').value;
   }
@@ -129,7 +127,6 @@ export class FormComponent implements OnInit {
     if(date){
       formattedDate = formatDate(date, format, locale);
     }
-    console.log(formattedDate);
     return formattedDate;
   }
 
@@ -144,12 +141,30 @@ export class FormComponent implements OnInit {
     this.apartmentArr.push(this.initApartmentsItem());
   }
 
+
+
   onFileChange($event) {
     let file = $event.target.files[0];
     this.formGroup.controls['identityPhotoId'].setValue(file ? file.name : '');
-    // this.fileName = file.name;
+    this.fileName = file.name;
     console.log(this.formGroup.controls['identityPhotoId'].value);
  }
+
+
+ getRewards(rewards){
+   rewards.forEach(element => {
+      element.date = this.dateFormat(element.date);
+   });
+    
+   return rewards;
+ }
+ getChildren(children){
+  children.forEach(element => {
+     element.birthdate = this.dateFormat(element.birthdate);
+  });
+   
+  return children;
+}
 
 
  getFormData(){
@@ -164,8 +179,9 @@ export class FormComponent implements OnInit {
       contactInfo: this.contactInfo,
       fin: this.fin,
       identityPhotoId: this.identityPhotoId,
-      rewards: this.rewardsArr.value,
-      children: this.childrenArr.value,
+      //rewards: this.rewardsArr.value,
+      rewards: this.getRewards(this.rewardsArr.value),
+      children: this.getChildren(this.childrenArr.value),
       apartments: this.apartmentArr.value
     }
 

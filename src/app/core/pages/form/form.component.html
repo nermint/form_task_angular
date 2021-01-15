@@ -136,7 +136,7 @@
                       /></label>
                       <input
                         type="hidden"
-                        name="fileHidden"
+                        name="identityPhotoId"
                         formControlName="identityPhotoId"
                       />
                     </div>
@@ -347,17 +347,17 @@
                             tərəf)</label
                           >
                           <div class="fileupload">
-                            <span class="fileupload-placeholder">{{
-                              fileName
-                            }}</span>
+                            <span class="fileupload-placeholder">
+                              <!-- {{fileName}} -->
+                            </span>
                             <label
-                              for="file"
+                              for="file2"
                               class="fileupload-button btn btn-small btn-primary"
                               >Yüklə
                               <input
-                                id="file"
+                                id="file2"
                                 type="file"
-                                (change)="onChildrenPhotoChange($event)"
+                                (change)="onFileChange($event)"
                             /></label>
                             <input
                               type="hidden"
@@ -495,15 +495,15 @@
                       <div class="col-12">
                         <div class="input-wrapper m-b-20">
                           <div class="fileupload">
-                            <span class="fileupload-placeholder">{{
-                              fileName
-                            }}</span>
+                            <span class="fileupload-placeholder">
+                              <!-- {{ fileName }} -->
+                            </span>
                             <label
-                              for="file"
+                              for="file3"
                               class="fileupload-button btn btn-small btn-primary"
                               >Yüklə
                               <input
-                                id="file"
+                                id="file3"
                                 type="file"
                                 (change)="onFileChange($event)"
                             /></label>
