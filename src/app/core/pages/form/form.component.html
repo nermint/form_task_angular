@@ -186,9 +186,9 @@
                       >
                         #{{ i + 1 }}
                       </h4>
-                      <span
-                        class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__remove icon-times"
-                      ></span>
+                      <mat-icon *ngIf="rewardsArr.controls.length > 1"
+                        (click)="deleteReward(i)"
+                        >delete</mat-icon>
                     </div>
                     <div class="row">
                       <mat-form-field appearance="outline">
@@ -261,9 +261,9 @@
                       >
                         #{{ i + 1 }}
                       </h4>
-                      <span
-                        class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__remove icon-times"
-                      ></span>
+                      <mat-icon *ngIf="childrenArr.controls.length > 1"
+                        (click)="deleteChild(i)"
+                        >delete</mat-icon>
                     </div>
                     <div class="row">
                       <div class="col-lg-12">
@@ -419,11 +419,11 @@
                       <h4
                         class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__title"
                       >
-                        #1
+                        #{{i+1}}
                       </h4>
-                      <span
-                        class="layout-holder__content__body__form__holder__section__area__block__list__item__heading__remove icon-times"
-                      ></span>
+                      <mat-icon *ngIf="apartmentArr.controls.length > 1"
+                        (click)="deleteApartment(i)"
+                        >delete</mat-icon>
                     </div>
                     <h3
                       class="layout-holder__content__body__form__holder__section__area__title"

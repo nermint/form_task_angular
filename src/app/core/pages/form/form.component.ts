@@ -141,6 +141,16 @@ export class FormComponent implements OnInit {
     this.apartmentArr.push(this.initApartmentsItem());
   }
 
+  deleteReward(index: number){
+    this.rewardsArr.removeAt(index);
+  }
+  deleteChild(index: number){
+    this.childrenArr.removeAt(index);
+  }
+  deleteApartment(index: number){
+    this.apartmentArr.removeAt(index);
+  }
+
 
 
   onFileChange($event) {
