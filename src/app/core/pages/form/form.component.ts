@@ -15,7 +15,6 @@ import { Regions } from '../../shared/region.datasource';
 export class FormComponent implements OnInit {
 
   formGroup:FormGroup;
-  fileName = '';
   regions = Regions;
   photoId:string;
   initForm(){
@@ -161,36 +160,38 @@ export class FormComponent implements OnInit {
 
     if($event.target.files.length > 0) 
      {
-      let file = $event.target.files[0];
+      let file;
+      for(let index = 0; index < $event.target.files.length; index++){
+        file = $event.target.files[index];
       
       const formData = new FormData();
       formData.append('file', file);
 
-      this.formService.photoUpload(formData).toPromise().then( data =>{
+      this.formService.photoUpload(formData).subscribe( data =>{
         this.photoId = data.id;
         switch(fileContain){
           case 'personalInfo':
             this.formGroup.get('identityPhotoId').setValue(this.photoId ? this.photoId : '');
             break;
           case 'childrenInfo':
-            for(let index = 0; index < this.childrenArr.value.length;index++){
               this.childrenArr.value[i].identityPhotoId = this.photoId;
-            }
             console.log(this.childrenArr.value);
             break;
           case 'apartmentInfo':
-            for(let index = 0; index < $event.target.files.length; index++){
-              this.apartmentArr.value[i].photos.push({photoId: $event.target.files[index]})
-
+            let multipleFile: string[] =[];
+            multipleFile.push(this.photoId);
+            for(let index = 0; index < multipleFile.length; index++){
+              this.apartmentArr.value[i].photos.push({photoId: multipleFile[index]})
             }
-            console.log(this.apartmentArr.value);
+            //}
+            // console.log(this.apartmentArr.value);
           default: 
             break;
         }
       });
 
+    }
 
-     //  this.fileName = file.name;
      }
  }
 
@@ -233,9 +234,6 @@ export class FormComponent implements OnInit {
     // this.getPhotoId();
  }
 
- 
-
- 
 
  getPhotoId(photo){
     const formData = new FormData();

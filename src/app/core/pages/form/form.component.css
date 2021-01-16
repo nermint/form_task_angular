@@ -290,15 +290,7 @@
     overflow: hidden
 }
 
-.fileupload input{
-    position: absolute;
-    right: -150px;
-    z-index: 1000;
-    transform: scale(1.5,1.5); 
-    -webkit-appearance: none;
-    opacity: 0;
-    cursor: pointer;
-}
+
 
 .fileupload-button {
     position: absolute;
