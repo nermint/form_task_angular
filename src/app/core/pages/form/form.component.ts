@@ -26,11 +26,11 @@ export class FormComponent implements OnInit {
       fathername: ['', [Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
       birthdate: ['',[Validators.required]],
       familyAddress: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(2)]],
-      regionId: [0, [Validators.min(0)]],
+      regionId: ['', [Validators.min(0)]],
       dateOfMartyrdomOrVeteran: ['',[Validators.required]],
       contactInfo: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(1)]],
       fin: ['', [Validators.maxLength(7), Validators.minLength(7)]],
-      identityPhotoId: ['',[Validators.required]],
+      identityPhotoId: [''],
       rewards: this.fb.array([this.initRewardsItem()]),
       children: this.fb.array([this.initChildrenItem()]),
       apartments: this.fb.array([this.initApartmentsItem()])
@@ -62,16 +62,16 @@ export class FormComponent implements OnInit {
       fin: ['',[Validators.maxLength(7)]],
       birthdate: ['',[Validators.required]],
       gender: [1],
-      identityPhotoId: ['',[Validators.required]]
+      identityPhotoId: ['']
     });
   }
 
   initApartmentsItem(){
     return this.fb.group({
-      peopleCount:[0,[Validators.required,Validators.min(0)]],
-      totalArea: [0,[Validators.required,Validators.min(0)]],
-      roomCount: [0,[Validators.required,Validators.min(0)]],
-      hasDocument: [Validators.required,false],
+      peopleCount:['',[Validators.required,Validators.min(0)]],
+      totalArea: ['',[Validators.required,Validators.min(0)]],
+      roomCount: ['',[Validators.required,Validators.min(0)]],
+      hasDocument: [false,[Validators.required,]],
       photos:this.fb.array([])
     });
   }
@@ -107,7 +107,7 @@ export class FormComponent implements OnInit {
     return this.formGroup.get('familyAddress').value;
   }
   get regionId(){
-    return this.formGroup.get('regionId').value;
+    return +this.formGroup.get('regionId').value;
   }
   get dateOfMartyrdomOrVeteran(){
     return this.formGroup.get('dateOfMartyrdomOrVeteran').value;

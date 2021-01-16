@@ -117,7 +117,7 @@
                     >
                     <!-- formControlName="identityPhotoId" -->
                     <div class="fileupload">
-                      <input type="file"  (change)="onFileChange($event, 'personalInfo')">
+                      <input type="file"  (change)="onFileChange($event, 'personalInfo')" required>
                       <!-- <label class="fileupload-button btn btn-small btn-primary">Yüklə</label> -->
                     </div>
 
@@ -327,7 +327,7 @@
 
 
                           <div class="fileupload">
-                            <input type="file" (change)="onFileChange($event, 'childrenInfo',i)">
+                            <input type="file" (change)="onFileChange($event, 'childrenInfo',i)" required>
                             <!-- <label class="fileupload-button btn btn-small btn-primary">Yüklə</label> -->
                           </div>
 
@@ -465,7 +465,7 @@
                         <div class="input-wrapper m-b-20">
 
                           <div class="fileupload">
-                            <input type="file" (change)="onFileChange($event, 'apartmentInfo',i)" multiple>
+                            <input type="file" (change)="onFileChange($event, 'apartmentInfo',i)" required multiple>
                             <!-- <label class="fileupload-button btn btn-small btn-primary">Yüklə</label> -->
                           </div>
 
@@ -509,11 +509,10 @@
           <button mat-raised-button color="primary" class="btn btn-fluid btn-send" 
           (click)="sendFormData()"
           [disabled]="! formGroup.valid"
+          type="submit"
           >GÖNDƏR</button>
       
         </div> 
-
-        <!-- [disabled]="! formGroup.valid" -->
       </form>
 
       <app-footer></app-footer>
