@@ -94,17 +94,9 @@
                     <mat-option selected="selected" disabled="disabled"
                       >Seçiniz</mat-option
                     >
-                    <mat-option value="0">Ağdam</mat-option>
-                    <mat-option value="1">Ağdərə</mat-option>
-                    <mat-option value="2">Cəbrayıl</mat-option>
-                    <mat-option value="3">Xocalı</mat-option>
-                    <mat-option value="4">Xocavənd</mat-option>
-                    <mat-option value="5">Laçın</mat-option>
-                    <mat-option value="6">Şuşa</mat-option>
-                    <mat-option value="7">Kəlbəcər</mat-option>
-                    <mat-option value="8">Zəngilan</mat-option>
-                    <mat-option value="9">Qubadlı</mat-option>
-                    <mat-option value="10">Füzuli</mat-option>
+                    <mat-option *ngFor="let region of regions" [value]='region.id' >
+                      {{ region.name }} 
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
 
@@ -233,9 +225,6 @@
               "
               [formGroupName]="i"
             >
-              <pre>
-                <pre>{{childrenArr.value | json}}</pre>
-              </pre>
               <div
                 class="layout-holder__content__body__form__holder__section__area__block"
               >
@@ -342,7 +331,7 @@
 
 
                           <div class="fileupload">
-                            <input type="file" (change)="onFileChange($event, 'childrenInfo')">
+                            <input type="file" (change)="onFileChange($event, 'childrenInfo',i)">
                             <label class="fileupload-button btn btn-small btn-primary">Yüklə</label>
                           </div>
 
@@ -481,7 +470,7 @@
                         <div class="input-wrapper m-b-20">
 
                           <div class="fileupload">
-                            <input type="file">
+                            <input type="file" (change)="onFileChange($event, 'apartmentInfo',i)" multiple>
                             <label class="fileupload-button btn btn-small btn-primary">Yüklə</label>
                           </div>
 
@@ -521,7 +510,12 @@
         </div>
 
         <div class="layout-holder__content__body__form__footer">
-          <button class="btn btn-fluid btn-primary" (click)="getFormData()">GÖNDƏR</button>
+
+          <button mat-raised-button color="primary" class="btn btn-fluid btn-send" 
+          (click)="getFormData()"
+          
+          >GÖNDƏR</button>
+      
         </div> 
 
         <!-- [disabled]="! formGroup.valid" -->

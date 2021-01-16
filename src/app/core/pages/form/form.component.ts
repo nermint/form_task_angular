@@ -4,6 +4,7 @@ import { FormGroup,FormBuilder, Validators,FormArray } from '@angular/forms';
 
 import { formatDate } from '@angular/common';
 import { FormService } from '../../services/form.service';
+import { Regions } from '../../shared/region.datasource';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class FormComponent implements OnInit {
 
   formGroup:FormGroup;
   fileName = '';
+  regions = Regions;
+  photoId:string;
   initForm(){
     this.formGroup = this.fb.group({
       name: ['', [Validators.maxLength(50), Validators.minLength(2)]],
@@ -40,8 +43,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.photos[0]['controls'].photos.value);
-    console.log(this.name);
   }
 
   initRewardsItem() {
@@ -68,14 +69,14 @@ export class FormComponent implements OnInit {
       totalArea: [0],
       roomCount: [0],
       hasDocument: [false],
-      photos:this.fb.array([this.initApartmentPhoto()])
+      photos:this.fb.array([])
     });
   }
-  initApartmentPhoto(){
-    return this.fb.group({
-      photoId:['']
-    });
-  }
+  // initApartmentPhoto(){
+  //   return this.fb.group({
+  //     photoId:['']
+  //   });
+  // }
 
   // get form data
   get rewardsArr() {
@@ -156,15 +157,38 @@ export class FormComponent implements OnInit {
   }
 
 
-  onFileChange($event, fileContain) {
+  onFileChange($event, fileContain,i?) {
 
     if($event.target.files.length > 0) 
      {
       let file = $event.target.files[0];
-      if(fileContain == 'personalInfo'){
-        this.formGroup.get('identityPhotoId').setValue(file ? file : '');
-      }
-    
+      
+      const formData = new FormData();
+      formData.append('file', file);
+
+      this.formService.photoUpload(formData).toPromise().then( data =>{
+        this.photoId = data.id;
+        switch(fileContain){
+          case 'personalInfo':
+            this.formGroup.get('identityPhotoId').setValue(this.photoId ? this.photoId : '');
+            break;
+          case 'childrenInfo':
+            for(let index = 0; index < this.childrenArr.value.length;index++){
+              this.childrenArr.value[i].identityPhotoId = this.photoId;
+            }
+            console.log(this.childrenArr.value);
+            break;
+          case 'apartmentInfo':
+            for(let index = 0; index < $event.target.files.length; index++){
+              this.apartmentArr.value[i].photos.push({photoId: $event.target.files[index]})
+
+            }
+            console.log(this.apartmentArr.value);
+          default: 
+            break;
+        }
+      });
+
 
      //  this.fileName = file.name;
      }
@@ -209,18 +233,24 @@ export class FormComponent implements OnInit {
     // this.getPhotoId();
  }
 
+ 
 
-//  getPhotoId(){
-//     const formData = new FormData();
-//     formData.append('file', this.formGroup.get('identityPhotoId').value);
+ 
 
-//     console.log(this.identityPhotoId);
+ getPhotoId(photo){
+    const formData = new FormData();
+    formData.append('file', photo);
 
-//     this.formService.photoUpload(formData).subscribe( data =>{
-//       console.log(data);
-//     });
-   
-// }
+    // this.formService.photoUpload(formData).subscribe( data =>{
+    //   console.log('post photo');
+    //   console.log(data.id);
+    //   this.photoId = data.id;
+    // });
+    this.formService.photoUpload(formData).toPromise().then( data =>{
+      this.photoId = data.id;
+      
+    });
+}
 
 
 }

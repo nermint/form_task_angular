@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon'; 
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   exports:[
     FormComponent,
