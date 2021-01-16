@@ -1,0 +1,52 @@
+
+
+
+
+
+/*  success css */
+.layout-holder__content__body {
+    -webkit-box-flex: 14;
+    -ms-flex: 14;
+    flex: 14
+}
+
+.flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+
+.flex-center {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center
+}
+
+
+.flex-middle {
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center
+}
+.action-status {
+    width: 360px
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto
+}
+.m-t-32 {
+    margin-top: 32px!important
+}
+
+.m-b-32 {
+    margin-bottom: 32px!important
+}
+
+
+
+
+

@@ -21,3 +21,9 @@
     background-position: 50%;
     background-size: cover
 }
+
+@media (max-width: 768px){
+    .layout-holder__banner__basic{
+        width: 0;
+    }
+}

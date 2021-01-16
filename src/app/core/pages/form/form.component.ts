@@ -5,6 +5,7 @@ import { FormGroup,FormBuilder, Validators,FormArray } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { FormService } from '../../services/form.service';
 import { Regions } from '../../shared/region.datasource';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private formService: FormService
+    private formService: FormService,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -71,12 +73,7 @@ export class FormComponent implements OnInit {
       photos:this.fb.array([])
     });
   }
-  // initApartmentPhoto(){
-  //   return this.fb.group({
-  //     photoId:['']
-  //   });
-  // }
-
+  
   // get form data
   get rewardsArr() {
     return this.formGroup.get('rewards') as FormArray;
@@ -136,7 +133,6 @@ export class FormComponent implements OnInit {
 
   addNewReward() {
     this.rewardsArr.push(this.initRewardsItem());
-    console.log(this.rewardsArr);
   }
   addChild() {
     this.childrenArr.push(this.initChildrenItem());
@@ -231,10 +227,18 @@ export class FormComponent implements OnInit {
 
     console.log(data);
     
-    // this.getPhotoId();
+    return data;
  }
 
 
+  sendFormData(){
+    const formData = this.getFormData();
+    console.log(formData);
+    this.formService.postFormData(formData).subscribe( data =>{
+      console.log(data);
+      this.router.navigate(['/success']);
+    });
+  }
 
 
 

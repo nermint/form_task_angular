@@ -16,6 +16,10 @@ export class FormService {
     return this.http.post(this.url+ 'File/photo', data);
   }
 
+  postFormData(data):Observable<any>{
+    return this.http.post(this.url+'Form', data);
+  }
+
   
   
 
