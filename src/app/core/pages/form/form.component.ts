@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup,FormBuilder, Validators,FormArray } from '@angular/forms';
 
-import { formatDate } from '@angular/common';
 import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
 import { Region } from '../../shared/models/region';
 import { FormData } from '../../shared/models/form';
-
+import { dateFormat } from '../../shared/helpers/date-format';
 
 @Component({
   selector: 'app-form',
@@ -71,7 +70,7 @@ export class FormComponent implements OnInit {
       peopleCount:['',[Validators.required,Validators.min(0)]],
       totalArea: ['',[Validators.required,Validators.min(0)]],
       roomCount: ['',[Validators.required,Validators.min(0)]],
-      hasDocument: [false,[Validators.required,]],
+      hasDocument: [false,[Validators.required]],
       photos:this.fb.array([])
     });
   }
@@ -86,9 +85,6 @@ export class FormComponent implements OnInit {
   
   get apartmentArr() {
     return this.formGroup.get('apartments') as FormArray;
-  }
-  get photos(){
-    return (this.formGroup.get('apartments') as FormArray).controls;
   }
 
   get name(){
@@ -123,16 +119,6 @@ export class FormComponent implements OnInit {
   }
 
   
-
-  dateFormat(date){
-    const format = 'yyyy-MM-ddTHH:mm:ss.SSSSSSS';
-    const locale = 'en-US';
-    let formattedDate='';
-    if(date){
-      formattedDate = formatDate(date, format, locale);
-    }
-    return formattedDate;
-  }
 
   addNewReward() {
     this.rewardsArr.push(this.initRewardsItem());
@@ -203,14 +189,14 @@ export class FormComponent implements OnInit {
 
   getRewards(rewards){
     rewards.forEach(element => {
-        element.date = this.dateFormat(element.date);
+        element.date = dateFormat(element.date);
     });
       
     return rewards;
   }
   getChildren(children){
     children.forEach(element => {
-      element.birthdate = this.dateFormat(element.birthdate);
+      element.date = dateFormat(element.date);
     });
     
     return children;
@@ -224,10 +210,10 @@ export class FormComponent implements OnInit {
       name: this.name ? this.name: '',
       surname: this.surname,
       fathername: this.fathername,
-      birthdate: this.dateFormat(this.birthdate),
+      birthdate: dateFormat(this.birthdate),
       familyAddress: this.familyAddress,
       regionId: this.regionId,
-      dateOfMartyrdomOrVeteran: this.dateFormat(this.dateOfMartyrdomOrVeteran),
+      dateOfMartyrdomOrVeteran: dateFormat(this.dateOfMartyrdomOrVeteran),
       contactInfo: this.contactInfo,
       fin: this.fin,
       identityPhotoId: this.identityPhotoId,
@@ -235,23 +221,19 @@ export class FormComponent implements OnInit {
       children: this.getChildren(this.childrenArr.value),
       apartments: this.apartmentArr.value
     }
-
-   
-
     console.log(data);
-    
     return data;
  }
 
   sendFormData(){
     const formData = this.getFormData();
     console.log(formData);
-    if(this.formGroup.valid){
+     if(this.formGroup.valid){
       this.formService.postFormData(formData).subscribe( data =>{
         console.log(data);
         this.router.navigate(['/success']);
       });
-    }
+     }
   } 
 
 

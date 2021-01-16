@@ -117,10 +117,11 @@
                     >
                     <!-- formControlName="identityPhotoId" -->
                     <div class="fileupload">
-                      <input type="file"  (change)="onFileChange($event, 'personalInfo')" required>
-                      <!-- <label class="fileupload-button btn btn-small btn-primary">Yüklə</label> -->
+                      <input type="file"  (change)="onFileChange($event, 'personalInfo')" required>  
+                       
                     </div>
-
+                   
+                    <!-- [hidden]="!fileSelected" -->
                     <div class="fileupload-list">
                       <div class="fileupload-file">
                         <span class="fileupload-file__remove icon-times"
@@ -328,6 +329,7 @@
 
                           <div class="fileupload">
                             <input type="file" (change)="onFileChange($event, 'childrenInfo',i)" required>
+                           
                             <!-- <label class="fileupload-button btn btn-small btn-primary">Yüklə</label> -->
                           </div>
 
@@ -511,7 +513,6 @@
           [disabled]="! formGroup.valid"
           type="submit"
           >GÖNDƏR</button>
-      
         </div> 
       </form>
 
