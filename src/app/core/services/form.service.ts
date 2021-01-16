@@ -12,9 +12,11 @@ export class FormService {
   url = environment.httpRequestUrl;
   constructor(private http: HttpClient) { }
 
-  photoUpload(data):Observable<any>{
+  uploadPhoto(data):Observable<any>{
     return this.http.post(this.url+ 'File/photo', data);
   }
+
+  
   
 
 }

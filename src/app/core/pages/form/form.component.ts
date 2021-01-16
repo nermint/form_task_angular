@@ -167,7 +167,7 @@ export class FormComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', file);
 
-      this.formService.photoUpload(formData).subscribe( data =>{
+      this.formService.uploadPhoto(formData).subscribe( data =>{
         this.photoId = data.id;
         switch(fileContain){
           case 'personalInfo':
@@ -235,20 +235,7 @@ export class FormComponent implements OnInit {
  }
 
 
- getPhotoId(photo){
-    const formData = new FormData();
-    formData.append('file', photo);
 
-    // this.formService.photoUpload(formData).subscribe( data =>{
-    //   console.log('post photo');
-    //   console.log(data.id);
-    //   this.photoId = data.id;
-    // });
-    this.formService.photoUpload(formData).toPromise().then( data =>{
-      this.photoId = data.id;
-      
-    });
-}
 
 
 }
