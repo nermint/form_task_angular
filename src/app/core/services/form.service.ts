@@ -12,6 +12,10 @@ export class FormService {
   url = environment.httpRequestUrl;
   constructor(private http: HttpClient) { }
 
+  getRegions(){
+    return this.http.get(this.url+ 'Form');
+  }
+
   uploadPhoto(data):Observable<any>{
     return this.http.post(this.url+ 'File/photo', data);
   }

@@ -4,8 +4,9 @@ import { FormGroup,FormBuilder, Validators,FormArray } from '@angular/forms';
 
 import { formatDate } from '@angular/common';
 import { FormService } from '../../services/form.service';
-import { Regions } from '../../shared/region.datasource';
 import { Router } from '@angular/router';
+import { Region } from '../../shared/models/region';
+import { FormData } from '../../shared/models/form';
 
 
 @Component({
@@ -16,20 +17,20 @@ import { Router } from '@angular/router';
 export class FormComponent implements OnInit {
 
   formGroup:FormGroup;
-  regions = Regions;
+  regions:Region[];
   photoId:string;
   initForm(){
     this.formGroup = this.fb.group({
-      name: ['', [Validators.maxLength(50), Validators.minLength(2)]],
-      surname: ['', [Validators.maxLength(50), Validators.minLength(2)]],
-      fathername: ['', [Validators.maxLength(50), Validators.minLength(2)]],
-      birthdate: [''],
-      familyAddress: ['', [Validators.maxLength(250), Validators.minLength(2)]],
-      regionId: ['', [Validators.min(0)]],
-      dateOfMartyrdomOrVeteran: [''],
-      contactInfo: ['', [Validators.maxLength(250), Validators.minLength(1)]],
+      name: ['', [Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
+      surname: ['', [Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
+      fathername: ['', [Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
+      birthdate: ['',[Validators.required]],
+      familyAddress: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(2)]],
+      regionId: [0, [Validators.min(0)]],
+      dateOfMartyrdomOrVeteran: ['',[Validators.required]],
+      contactInfo: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(1)]],
       fin: ['', [Validators.maxLength(7), Validators.minLength(7)]],
-      identityPhotoId: [''],
+      identityPhotoId: ['',[Validators.required]],
       rewards: this.fb.array([this.initRewardsItem()]),
       children: this.fb.array([this.initChildrenItem()]),
       apartments: this.fb.array([this.initApartmentsItem()])
@@ -44,32 +45,33 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getRegions();
   }
 
   initRewardsItem() {
     return this.fb.group({
-      name: [''],
-      date:['']
+      name: ['',[Validators.required,Validators.maxLength(1000), Validators.minLength(1)]],
+      date:['',[Validators.required]]
     });
   }
 
   initChildrenItem(){
     return this.fb.group({
-      name:[''],
-      surname: [''],
-      fin: [''],
-      birthdate: [''],
-      gender: [0],
-      identityPhotoId: ['']
+      name:['',[Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
+      surname: ['',[Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
+      fin: ['',[Validators.maxLength(7)]],
+      birthdate: ['',[Validators.required]],
+      gender: [1],
+      identityPhotoId: ['',[Validators.required]]
     });
   }
 
   initApartmentsItem(){
     return this.fb.group({
-      peopleCount:[0],
-      totalArea: [0],
-      roomCount: [0],
-      hasDocument: [false],
+      peopleCount:[0,[Validators.required,Validators.min(0)]],
+      totalArea: [0,[Validators.required,Validators.min(0)]],
+      roomCount: [0,[Validators.required,Validators.min(0)]],
+      hasDocument: [Validators.required,false],
       photos:this.fb.array([])
     });
   }
@@ -120,6 +122,7 @@ export class FormComponent implements OnInit {
     return this.formGroup.get('identityPhotoId').value;
   }
 
+  
 
   dateFormat(date){
     const format = 'yyyy-MM-ddTHH:mm:ss.SSSSSSS';
@@ -151,6 +154,12 @@ export class FormComponent implements OnInit {
     this.apartmentArr.removeAt(index);
   }
 
+  getRegions(){
+    this.formService.getRegions().subscribe(data =>{
+      this.regions = data['regions'];
+    });
+  }
+
 
   onFileChange($event, fileContain,i?) {
 
@@ -171,7 +180,7 @@ export class FormComponent implements OnInit {
             break;
           case 'childrenInfo':
               this.childrenArr.value[i].identityPhotoId = this.photoId;
-            console.log(this.childrenArr.value);
+            // console.log(this.childrenArr.value);
             break;
           case 'apartmentInfo':
             let multipleFile: string[] =[];
@@ -192,25 +201,27 @@ export class FormComponent implements OnInit {
  }
 
 
- getRewards(rewards){
-   rewards.forEach(element => {
-      element.date = this.dateFormat(element.date);
-   });
+  getRewards(rewards){
+    rewards.forEach(element => {
+        element.date = this.dateFormat(element.date);
+    });
+      
+    return rewards;
+  }
+  getChildren(children){
+    children.forEach(element => {
+      element.birthdate = this.dateFormat(element.birthdate);
+    });
     
-   return rewards;
- }
- getChildren(children){
-  children.forEach(element => {
-     element.birthdate = this.dateFormat(element.birthdate);
-  });
-   
-  return children;
-}
+    return children;
+  }
+
+
 
 
  getFormData(){
-    const data = {
-      name: this.name,
+    const data:FormData = {
+      name: this.name ? this.name: '',
       surname: this.surname,
       fathername: this.fathername,
       birthdate: this.dateFormat(this.birthdate),
@@ -225,20 +236,23 @@ export class FormComponent implements OnInit {
       apartments: this.apartmentArr.value
     }
 
+   
+
     console.log(data);
     
     return data;
  }
 
-
   sendFormData(){
     const formData = this.getFormData();
     console.log(formData);
-    this.formService.postFormData(formData).subscribe( data =>{
-      console.log(data);
-      this.router.navigate(['/success']);
-    });
-  }
+    if(this.formGroup.valid){
+      this.formService.postFormData(formData).subscribe( data =>{
+        console.log(data);
+        this.router.navigate(['/success']);
+      });
+    }
+  } 
 
 
 

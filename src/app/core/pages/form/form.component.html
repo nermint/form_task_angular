@@ -254,22 +254,18 @@
                             class="layout-holder__content__body__form__holder__section__area"
                           >
                             <div class="radio-group">
-                              <label for="genderChildrenType" class="radio">
+                              <label  class="radio">
                                 <input
-                                  name="gender"
                                   type="radio"
-                                  id="genderChildrenType"
                                   value="1"
                                   formControlName="gender"
                                 />
                                 <span class="radio-control"></span>
                                 <span class="radio-label">Kişi</span>
                               </label>
-                              <label for="genderChildrenType2" class="radio">
+                              <label class="radio">
                                 <input
-                                  name="gender"
                                   type="radio"
-                                  id="genderChildrenType2"
                                   value="2"
                                   formControlName="gender"
                                 />
@@ -407,22 +403,21 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="radio-group m-b-20">
-                          <label for="hasDocumentYes" class="radio">
+                          <label  class="radio">
                             <input
                               type="radio"
-                              id="hasDocumentYes"
-                              name="hasDocument"
+                              
+                             
                               value="true"
                               formControlName="hasDocument"
                             />
                             <span class="radio-control"></span>
                             <span class="radio-label">Sənədli</span>
                           </label>
-                          <label for="hasDocumentNo" class="radio">
+                          <label  class="radio">
                             <input
                               type="radio"
-                              id="hasDocumentNo"
-                              name="hasDocument"
+                             
                               value="false"
                               formControlName="hasDocument"
                             />
@@ -513,7 +508,7 @@
 
           <button mat-raised-button color="primary" class="btn btn-fluid btn-send" 
           (click)="sendFormData()"
-          
+          [disabled]="! formGroup.valid"
           >GÖNDƏR</button>
       
         </div> 
