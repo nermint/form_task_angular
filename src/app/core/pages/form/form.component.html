@@ -118,7 +118,6 @@
                     <!-- formControlName="identityPhotoId" -->
                     <div class="fileupload">
                       <input type="file"  (change)="onFileChange($event, 'personalInfo')" required>  
-                       
                     </div>
                    
                     <!-- [hidden]="!fileSelected" -->
@@ -510,12 +509,13 @@
 
           <button mat-raised-button color="primary" class="btn btn-fluid btn-send" 
           (click)="sendFormData()"
-          [disabled]="! formGroup.valid"
+          
           type="submit"
           >GÖNDƏR</button>
         </div> 
       </form>
 
+      <!-- [disabled]="! formGroup.valid" -->
       <app-footer></app-footer>
     </div>
   </div>

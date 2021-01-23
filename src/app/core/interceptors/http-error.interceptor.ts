@@ -15,42 +15,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
    
           catchError((error: HttpErrorResponse) => {
    
-            let errorMessage = '';
+            let errorMessage = [];
    
-            if (error.error instanceof ErrorEvent) {
    
-              // client-side error
-   
-              errorMessage = `Error: ${error.error.message}`;
-   
-            } else {
-   
-              // server-side error
-   
-              errorMessage=error.message;
-              switch(error.status){
-                case 400:
-                  errorMessage ="Bad Request";
-                  break;
-                case 401:
-                  errorMessage="Unauthorized"
-                  break;
-                case 403:
-                    errorMessage="Forbidden";
-                    break;
-                case 404:
-                    errorMessage="Not found";
-                    break;
-                case 422:
-                      errorMessage="Unprocessable Entity"
-                      break;
-            }
-            
-            }
-            
-            
-            window.alert(errorMessage);
+              errorMessage=error.error.errors;
+
            
+            errorMessage.forEach(error => {
+              window.alert(error.message);
+            });
    
             return throwError(errorMessage);
    

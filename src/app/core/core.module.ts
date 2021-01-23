@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormComponent } from './pages/form/form.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { SuccessComponent } from './pages/success/success.component';
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 
 // material
@@ -18,8 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     FormComponent,
+    SuccessComponent,
     BannerComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   exports:[
     FormComponent,
+    SuccessComponent,
     FooterComponent,
     BannerComponent
   ],

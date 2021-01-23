@@ -7,12 +7,16 @@ import { Router } from '@angular/router';
 import { Region } from '../../shared/models/region';
 import { FormData } from '../../shared/models/form';
 import { dateFormat } from '../../shared/helpers/date-format';
+import { initForm } from '../../shared/helpers/init-form';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
+
+
+
 export class FormComponent implements OnInit {
 
   formGroup:FormGroup;
@@ -25,7 +29,7 @@ export class FormComponent implements OnInit {
       fathername: ['', [Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
       birthdate: ['',[Validators.required]],
       familyAddress: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(2)]],
-      regionId: ['', [Validators.min(0)]],
+      regionId: [0, [Validators.min(0)]],
       dateOfMartyrdomOrVeteran: ['',[Validators.required]],
       contactInfo: ['', [Validators.required,Validators.maxLength(250), Validators.minLength(1)]],
       fin: ['', [Validators.maxLength(7), Validators.minLength(7)]],
@@ -36,6 +40,8 @@ export class FormComponent implements OnInit {
     })
   }
 
+
+
   constructor(
     private fb: FormBuilder,
     private formService: FormService,
@@ -45,6 +51,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.getRegions();
+    
   }
 
   initRewardsItem() {
@@ -60,7 +67,7 @@ export class FormComponent implements OnInit {
       surname: ['',[Validators.required,Validators.maxLength(50), Validators.minLength(2)]],
       fin: ['',[Validators.maxLength(7)]],
       birthdate: ['',[Validators.required]],
-      gender: [1],
+      gender: [1, [Validators.required]],
       identityPhotoId: ['']
     });
   }
@@ -148,7 +155,6 @@ export class FormComponent implements OnInit {
 
 
   onFileChange($event, fileContain,i?) {
-
     if($event.target.files.length > 0) 
      {
       let file;
@@ -174,16 +180,13 @@ export class FormComponent implements OnInit {
             for(let index = 0; index < multipleFile.length; index++){
               this.apartmentArr.value[i].photos.push({photoId: multipleFile[index]})
             }
-            //}
-            // console.log(this.apartmentArr.value);
           default: 
             break;
         }
       });
 
     }
-
-     }
+  }
  }
 
 
@@ -191,21 +194,32 @@ export class FormComponent implements OnInit {
     rewards.forEach(element => {
         element.date = dateFormat(element.date);
     });
-      
     return rewards;
   }
   getChildren(children){
     children.forEach(element => {
-      element.date = dateFormat(element.date);
+      element.birthdate = dateFormat(element.birthdate);
+      if(! element.fin){
+        delete element.fin;
+      }
     });
-    
     return children;
+  }
+  getApartments(apartments){
+    apartments.forEach(element => {
+    if(! element.photos){
+      delete element.photos;
+    }
+    });
+    return apartments;
   }
 
 
 
 
  getFormData(){
+
+
     const data:FormData = {
       name: this.name ? this.name: '',
       surname: this.surname,
@@ -219,8 +233,19 @@ export class FormComponent implements OnInit {
       identityPhotoId: this.identityPhotoId,
       rewards: this.getRewards(this.rewardsArr.value),
       children: this.getChildren(this.childrenArr.value),
-      apartments: this.apartmentArr.value
+      //apartments: this.apartmentArr.value
+      apartments: this.getApartments(this.apartmentArr.value)
     }
+    if (! this.fin) {
+      delete data.fin;
+    }
+    if(! this.regionId){
+      delete data.regionId;
+    }
+    if(! this.identityPhotoId){
+      delete data.identityPhotoId;
+    }
+
     console.log(data);
     return data;
  }
@@ -228,12 +253,12 @@ export class FormComponent implements OnInit {
   sendFormData(){
     const formData = this.getFormData();
     console.log(formData);
-     if(this.formGroup.valid){
+     // if(this.formGroup.valid){
       this.formService.postFormData(formData).subscribe( data =>{
         console.log(data);
         this.router.navigate(['/success']);
       });
-     }
+    // }
   } 
 
 
